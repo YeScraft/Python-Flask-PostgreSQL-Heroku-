@@ -1,1 +1,4 @@
-web: gunicorn -w 4 -b 127.0.0.1:5000 app:app
+release: heroku addons:add heroku-postgresql
+release: flask db migrate -m "Change DataField"
+release: flask db upgrade
+web: gunicorn app:app
