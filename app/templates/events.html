@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block app_content %}
+<!--{{ super() }}-->
+
+<div class="mt-5 col-5 offset-md-4">
+
+    {% for cat, msg in get_flashed_messages(True) %}
+        <div class="alert alert-{{cat}}" role="alert">{{msg}}</div>
+    {% endfor %}
+
+    <div class="d-grid gap-2 mx-auto">
+        <a href="{{url_for('create_event')}}" class="btn btn-block btn-primary" type="button">Create event</a>
+    </div>
+
+    <h1 class="mt-3">Events:</h1>
+
+    {% for event in events %}
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ event.topic }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Author: {{ event.author }}</h6>
+                <div class="badge bg-warning text-wrap" style="width: 10rem;">
+                    Begin: {{ event.begin }}
+                </div>
+                <div class="badge bg-warning text-wrap" style="width: 10rem;">
+                    End: {{ event.end }}
+                </div>
+                <div class="mt-2" style="overflow: auto; max-height: 90px">{{ event.description }}</div>
+                {% if event.author == current_user.get_name() %}
+                    <a href="{{ url_for('changeevent', event_id=event._id) }}" class="mt-2 btn btn-primary" type="button">Change</a>
+                    <a href="{{ url_for('deleteevent', event_id=event._id) }}" class="mt-2 btn btn-secondary" type="button">Delete</a>
+                {% else %}
+                    <a href="#" class="mt-2 btn btn-primary" type="button" hidden>Change</a>
+                    <a href="#" class="mt-2 btn btn-secondary" type="button" hidden>Delete</a>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+{% endblock %}
