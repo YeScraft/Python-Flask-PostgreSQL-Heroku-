@@ -1,4 +1,4 @@
-# # Skillfactory-module-e9_11-YeSergey (yesergeysf911)
+# # Skillfactory-module-e9_11-YeSergey (сервис планирования событий Flask-PostgreSQL-Heroku)
 
 Приложение доступно по адресу: https://enigmatic-oasis-62843.herokuapp.com/
 
